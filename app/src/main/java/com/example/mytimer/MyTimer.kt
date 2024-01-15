@@ -54,6 +54,10 @@ class MyTimer {
         }
     }
 
+    fun quitTimer(){
+        backgroundThread.quit()
+    }
+
     private fun progressTimer() {
         backgroundThread.executeTask {
             for (tick in counter.get() downTo 0) {

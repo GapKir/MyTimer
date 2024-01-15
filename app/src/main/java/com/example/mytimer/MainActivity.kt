@@ -33,6 +33,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onDestroy() {
+        timer.quitTimer()
+        super.onDestroy()
+    }
+
     private fun showToast() {
         Toast.makeText(this, getString(R.string.finished_timer), Toast.LENGTH_SHORT).show()
     }

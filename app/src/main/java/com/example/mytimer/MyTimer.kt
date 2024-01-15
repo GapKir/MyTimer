@@ -41,16 +41,17 @@ class MyTimer {
 
     fun resetTimer() {
         isTimerStarted = false
-        lock.lock()
-        try {
-            counter.set(DEFAULT_TIMER_VALUE)
-            handler.post {
-                callback?.invoke(formattingDate())
+        backgroundThread.executeTask {
+            lock.lock()
+            try {
+                counter.set(DEFAULT_TIMER_VALUE)
+                handler.post {
+                    callback?.invoke(formattingDate())
+                }
+            } finally {
+                lock.unlock()
             }
-        } finally {
-            lock.unlock()
         }
-
     }
 
     private fun progressTimer() {
